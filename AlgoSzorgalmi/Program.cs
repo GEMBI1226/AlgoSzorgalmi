@@ -14,8 +14,8 @@ namespace AlgoSzorgalmi
     }
     public class LancoltLista
     {
-        const int MaxElem = 20;
         const int VegJel = -1;
+        const int MaxElem = 20;
 
         Node[] Elem = new Node[MaxElem + 1];
         int Szabad;
@@ -174,39 +174,63 @@ namespace AlgoSzorgalmi
     {
         static void Main(string[] args)
         {
+            int hely;
             LancoltLista lista = new LancoltLista();
             lista.SzabadKezd();
 
             for (int i = 1; i <= 10; i++)
                 lista.ListaFuzVeg(i);
 
-            Console.WriteLine("1. Lista feltöltve 1-től 10-ig:");
+            Console.WriteLine("Lista feltöltve:");
             lista.Kiir();
+            Console.WriteLine();
 
             lista.ListaTorolElol();
-            Console.WriteLine("2. Törlés elöl után:");
+            Console.WriteLine("Első elem törlése:");
             lista.Kiir();
-
-            lista.ListaTorolVeg();
-            Console.WriteLine("3. Törlés hátul után:");
-            lista.Kiir();
-
-            if (lista.ListaKereses(5, out int hely))
-                Console.WriteLine("A 5 érték megtalálható a(z) " + hely + ". indexen.");
-            else
-                Console.WriteLine("A 5 nincs a listában.");
-
-            lista.ListaFuzElol(99);
-            Console.WriteLine("4. 99 beszúrva a lista elejére:");
-            lista.Kiir();
+            Console.WriteLine();
 
             lista.ListaFuzMoge(lista.Fej, 69);
-            Console.WriteLine("5. 77 beszúrva a FEJ mögé (99 mögé):");
+            Console.WriteLine("69 beszúrva a FEJ mögé:");
             lista.Kiir();
+            Console.WriteLine();
+
+            lista.ListaTorolVeg();
+            Console.WriteLine("Utolsó elem törlése:");
+            lista.Kiir();
+            Console.WriteLine();
+
+            lista.ListaFuzElol(99);
+            Console.WriteLine("99 beszúrva a lista elejére:");
+            lista.Kiir();
+            Console.WriteLine();
 
             lista.ListaTorolMogul(lista.Fej);
-            Console.WriteLine("6. FEJ mögötti elem törölve:");
+            Console.WriteLine("FEJ mögötti elem törölve:");
             lista.Kiir();
+            Console.WriteLine();
+
+            lista.ListaFuzVeg(2000);
+            Console.WriteLine("2000 beszúrva a lista végére:");
+            lista.Kiir();
+            Console.WriteLine();
+
+            lista.ListaKereses(5, out hely);
+            lista.ListaTorolMogul(hely);
+            Console.WriteLine("Az 5 mögötti elem törölve:");
+            lista.Kiir();
+            Console.WriteLine();
+
+            if (lista.ListaKereses(13, out hely))
+                Console.WriteLine("A 13 érték megtalálható a(z) " + hely + ". indexen.");
+            else
+                Console.WriteLine("A 13 nincs a listában.");
+            Console.WriteLine();
+
+            if (lista.ListaKereses(5, out hely))
+                Console.WriteLine("A 5 érték megtalálható az " + hely + ". indexen.");
+            else
+                Console.WriteLine("A 5 nincs a listában.");
         }
     }
 }
