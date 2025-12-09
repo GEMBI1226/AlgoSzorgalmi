@@ -54,7 +54,8 @@ namespace AlgoSzorgalmi
         }
         public bool ListaFuzElol(int adat)
         {
-            if (Lefoglal(out int p))
+            int p;
+            if (Lefoglal(out p))
             {
                 Elem[p].Ertek = adat;
                 Elem[p].Kov = Fej;
@@ -66,9 +67,10 @@ namespace AlgoSzorgalmi
 
         public bool ListaTorolElol()
         {
+            int p;
             if (Fej != VegJel)
             {
-                int p = Fej;
+                p = Fej;
                 Fej = Elem[Fej].Kov;
                 Felszabadit(p);
                 return true;
@@ -78,7 +80,8 @@ namespace AlgoSzorgalmi
 
         public bool ListaFuzMoge(int EzUtan, int adat)
         {
-            if (EzUtan != VegJel && Lefoglal(out int p))
+            int p;
+            if (EzUtan != VegJel && Lefoglal(out p))
             {
                 Elem[p].Ertek = adat;
                 Elem[p].Kov = Elem[EzUtan].Kov;
@@ -90,9 +93,10 @@ namespace AlgoSzorgalmi
 
         public bool ListaTorolMogul(int EMogul)
         {
+            int p;
             if (EMogul != VegJel && (Elem[EMogul].Kov != VegJel))
             {
-                int p = Elem[EMogul].Kov;
+                p = Elem[EMogul].Kov;
                 Elem[EMogul].Kov = Elem[p].Kov;
                 Felszabadit(p);
                 return true;
@@ -102,13 +106,14 @@ namespace AlgoSzorgalmi
 
         public bool ListaFuzVeg(int adat)
         {
+            int p;
             if (Fej == VegJel)
             {
                 return ListaFuzElol(adat);
             }
             else
             {
-                int p = Fej;
+                p = Fej;
                 while (Elem[p].Kov != VegJel)
                 {
                     p = Elem[p].Kov;
@@ -116,9 +121,9 @@ namespace AlgoSzorgalmi
                 return ListaFuzMoge(p, adat);
             }
         }
-
         public bool ListaTorolVeg()
         {
+            int pe, p;
             if (Fej != VegJel)
             {
                 if (Elem[Fej].Kov == VegJel)
@@ -127,8 +132,8 @@ namespace AlgoSzorgalmi
                 }
                 else
                 {
-                    int pe = Fej;
-                    int p = Elem[Fej].Kov;
+                    pe = Fej;
+                    p = Elem[Fej].Kov;
                     while (Elem[p].Kov != VegJel)
                     {
                         pe = p;
@@ -142,20 +147,21 @@ namespace AlgoSzorgalmi
 
         public bool ListaKereses(int adat, out int hely)
         {
-            int p = Fej;
+            int p;
+            p = Fej;
             while (p != VegJel && Elem[p].Ertek != adat)
             {
                 p = Elem[p].Kov;
             }
             hely = p;
             return p != VegJel;
-
         }
 
         public void Kiir()
         {
+            int p;
             Console.Write("Lista: ");
-            int p = Fej;
+            p = Fej;
             while (p != VegJel)
             {
                 Console.Write(Elem[p].Ertek + " ");
@@ -163,12 +169,7 @@ namespace AlgoSzorgalmi
             }
             Console.WriteLine();
         }
-
-
     }
-
-
-
     internal class Program
     {
         static void Main(string[] args)
@@ -182,40 +183,30 @@ namespace AlgoSzorgalmi
             Console.WriteLine("1. Lista feltöltve 1-től 10-ig:");
             lista.Kiir();
 
-
             lista.ListaTorolElol();
             Console.WriteLine("2. Törlés elöl után:");
             lista.Kiir();
 
-
             lista.ListaTorolVeg();
             Console.WriteLine("3. Törlés hátul után:");
             lista.Kiir();
-
 
             if (lista.ListaKereses(5, out int hely))
                 Console.WriteLine("A 5 érték megtalálható a(z) " + hely + ". indexen.");
             else
                 Console.WriteLine("A 5 nincs a listában.");
 
-
             lista.ListaFuzElol(99);
-            Console.WriteLine("4. 12 beszúrva a lista elejére:");
+            Console.WriteLine("4. 99 beszúrva a lista elejére:");
             lista.Kiir();
 
             lista.ListaFuzMoge(lista.Fej, 69);
-            Console.WriteLine("5. 77 beszúrva a FEJ mögé (12 mögé):");
+            Console.WriteLine("5. 77 beszúrva a FEJ mögé (99 mögé):");
             lista.Kiir();
-
 
             lista.ListaTorolMogul(lista.Fej);
             Console.WriteLine("6. FEJ mögötti elem törölve:");
             lista.Kiir();
-
-            Console.ReadKey();
         }
-
-
-
     }
 }
